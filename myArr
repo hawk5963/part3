@@ -1,0 +1,32 @@
+#include <cstring>
+#include <iostream> 
+int main(int argc, char **argv)
+{
+    int* myarr = (int*)malloc(20*sizeof(int));
+    //hardcode the first two fibonacci numbers
+    *(myarr+0*sizeof(int)) = 0;
+    *(myarr+1*sizeof(int)) = 1;
+    //fill the array with the fibonacci numbers
+    int prev1 = 0;
+    int prev2 = 1;
+    int temp = 0;
+    for(int a = 2; a < 20; a++)
+    {
+        int current;
+        temp = prev1+prev2;
+        //use pointer arithmetic to set myarr at the current value to temp.
+        *(myarr+a*sizeof(int)) = temp;
+        prev1 = prev2;
+        prev2 = temp;
+        //so, this commented out print works fine here, but when I try it later it doesn't work.
+       // printf("[%d]",*(myarr+a*sizeof(int)));
+    }
+    //print out the array
+    for(int b = 0; b < 20; b++)
+    {
+    //for some reason, upon printing fibonacci here, it doesn't work.
+        printf("[%d]",*(myarr+b*sizeof(int)));
+    }
+    //free up the memory.
+    free(myarr);
+}
